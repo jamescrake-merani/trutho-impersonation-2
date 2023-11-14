@@ -25,7 +25,7 @@
     (let [current-word (first in)
           next-word (second in)
           current-word-map (get out current-word)]
-      (if (nil? current-word-map)
+      (if (and (nil? current-word-map) (not (nil? current-word)))
         (recur
          in
          (assoc out current-word {}))
