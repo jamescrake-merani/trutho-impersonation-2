@@ -63,5 +63,9 @@
                 (recur new-accumulator
                        (rest words))))))))))
 
-;; (defn generate-message [origin chain]
-;;   )
+ (defn generate-message [origin chain]
+   (loop [words [origin]]
+     (let [next-word (markov-next-word (last words) chain)]
+       (if (nil? next-word)
+         (string/join " " words)
+         (recur (conj words next-word))))))
