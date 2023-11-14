@@ -12,6 +12,9 @@
       (string/lower-case)
       (string/replace match-punc-expr "")))
 
+;; TODO: For testing purposes. I'll remove this later.
+(def test-message "Hello! This is a test message! :)")
+
 
 (defn build-markov-chain [words]
   (loop [in words
