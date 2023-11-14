@@ -28,9 +28,10 @@
          (assoc out current-word {}))
         (if-not (nil? next-word)
           (recur
-           (rest words)
-           (assoc current-word-map
-                  (inc (get current-word-map next-word 0))))
+           (rest in)
+           (assoc out
+                  current-word
+                  (assoc current-word-map next-word (inc (get current-word-map next-word 0)))))
           out)))))
 
 (defn build-messages-markov-chain [messages]
