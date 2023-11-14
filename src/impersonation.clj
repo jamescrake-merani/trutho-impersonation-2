@@ -27,7 +27,7 @@
           current-word-map (get out current-word)]
       (if (nil? current-word-map)
         (recur
-         words
+         in
          (assoc out current-word {}))
         (if-not (nil? next-word)
           (recur
