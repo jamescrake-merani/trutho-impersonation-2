@@ -40,6 +40,6 @@
 (defn build-messages-markov-chain [messages]
   "Build a map representing a markov chain from MESSAGES."
   (build-markov-chain
-   (reduce #(concat %1 (-> %2 (normalise-str) (string/split #" ")))
+   (reduce #(concat %1 (-> %2 (normalise-str) (string/split #" ") (conj nil)))
            []
            messages)))
