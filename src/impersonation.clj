@@ -43,3 +43,25 @@
    (reduce #(concat %1 (-> %2 (normalise-str) (string/split #" ") (conj nil)))
            []
            messages)))
+
+(defn markov-next-word
+  [current chain]
+  (let [frequency-map (get chain current)]
+    (if (nil? frequency-map)
+      nil
+      (let [random-pos (rand-int (:total frequency-map))]
+        (loop [accumulator 0
+               words (seq frequency-map)]
+          (if (= (-> words first first) :total)
+            (recur
+             accumulator
+             (rest words))
+            (let [current-word (first words)
+                  new-accumulator (+ accumulator (second current-word))]
+              (if (> new-accumulator random-pos)
+                (first current-word)
+                (recur new-accumulator
+                       (rest words))))))))))
+
+;; (defn generate-message [origin chain]
+;;   )
