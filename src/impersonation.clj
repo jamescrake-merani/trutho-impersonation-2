@@ -28,13 +28,14 @@
       (if (and (nil? current-word-map) (not (nil? current-word)))
         (recur
          in
-         (assoc out current-word {}))
+         (assoc out current-word {:total 0}))
         (if-not (nil? current-word)
           (recur
            (rest in)
            (assoc out
                   current-word
-                  (assoc current-word-map next-word (inc (get current-word-map next-word 0)))))
+                  (assoc current-word-map next-word (inc (get current-word-map next-word 0))
+                         :total (inc (:total current-word-map)))))
           out)))))
 
 (defn build-messages-markov-chain [messages]
