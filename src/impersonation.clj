@@ -29,7 +29,7 @@
         (recur
          in
          (assoc out current-word {}))
-        (if-not (nil? next-word)
+        (if-not (nil? current-word)
           (recur
            (rest in)
            (assoc out
