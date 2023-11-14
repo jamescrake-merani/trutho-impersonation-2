@@ -17,6 +17,9 @@
 
 
 (defn build-markov-chain [words]
+  "Returns a map representing a markov chain where each word in WORDS will is a
+  key in the map, and the value contains all the frequencies of a next word
+  coming."
   (loop [in words
          out {}]
     (let [current-word (first in)
@@ -35,6 +38,7 @@
           out)))))
 
 (defn build-messages-markov-chain [messages]
+  "Build a map representing a markov chain from MESSAGES."
   (build-markov-chain
    (reduce #(concat %1 (-> %2 (normalise-str) (string/split #" ")))
            []
