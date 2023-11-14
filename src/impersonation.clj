@@ -12,3 +12,26 @@
       (string/lower-case)
       (string/replace match-punc-expr "")))
 
+
+(defn build-markov-chain [words]
+  (loop [in words
+         out {}]
+    (let [current-word (first in)
+          next-word (second in)
+          current-word-map (get out current-word)]
+      (if (nil? current-word-map)
+        (recur
+         words
+         (assoc out current-word {}))
+        (if-not (nil? next-word)
+          (recur
+           (rest words)
+           (assoc current-word-map
+                  (inc (get current-word-map next-word 0))))
+          out)))))
+
+(defn build-messages-markov-chain [messages]
+  (build-markov-chain
+   (reduce #(concat %1 (-> %2 (normalise-str) (string/split #" ")))
+           []
+           messages)))
