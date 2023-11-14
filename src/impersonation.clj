@@ -13,8 +13,7 @@
       (string/replace match-punc-expr "")))
 
 ;; TODO: For testing purposes. I'll remove this later.
-(def test-message "Hello! This is a test message! :)")
-
+(def test-message "tick tock tick tock tick tock tick tock")
 
 (defn build-markov-chain [words]
   "Returns a map representing a markov chain where each word in WORDS will is a
